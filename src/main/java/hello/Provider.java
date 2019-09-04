@@ -3,7 +3,7 @@ package hello;
 import org.springframework.data.annotation.Id;
 
 
-public class Customer {
+public class Provider {
 
     @Id
     public String id;
@@ -11,9 +11,9 @@ public class Customer {
     public String firstName;
     public String lastName;
 
-    public Customer() {}
+    public Provider() {}
 
-    public Customer(String firstName, String lastName) {
+    public Provider(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -21,7 +21,7 @@ public class Customer {
     @Override
     public String toString() {
         return String.format(
-                "Customer[id=%s, firstName='%s', lastName='%s']",
+                "Provider[id=%s, firstName='%s', lastName='%s']",
                 id, firstName, lastName);
     }
 

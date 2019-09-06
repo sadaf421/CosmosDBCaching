@@ -1,6 +1,7 @@
 package hello;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -63,8 +64,8 @@ public class Application implements CommandLineRunner {
 			System.out.println(providerTwo);
 		}
 		long endTime = System.nanoTime();
-		long duration = (endTime - startTime)/1000000;
-		System.out.println(" Time taken to read 11000 records from two different documents ---------> "+duration +"ms"+" \n provider 1 count --->"+repository.count()+" \n provider 2 count --->"+repository_two.count());
+		long duration = (endTime - startTime);
+		System.out.println(" Time taken to read 21000 records from two different documents ---------> "+TimeUnit.NANOSECONDS.toMillis(duration) +"ms"+" \n provider 1 count --->"+repository.count()+" \n provider 2 count --->"+repository_two.count());
 
 		/*fetch an individual Provider
 		System.out.println("Provider found with findByFirstName('sadaf'):");

@@ -34,8 +34,13 @@ public class Application implements CommandLineRunner {
 		repository.deleteAll();
 
 		// save a couple of Provider
-		repository.save(new Provider(getProviderString(), getProviderString()));
-		repository.save(new Provider("Urvashi", "Gautam"));
+		for(int i=0;i<1000;i++) {
+			repository.save(new Provider(getProviderString(), getProviderString()));
+		}
+		
+		
+		
+		//repository.save(new Provider("Urvashi", "Gautam"));
 
 		// fetch all Provider
 		System.out.println("Provider found with findAll():");

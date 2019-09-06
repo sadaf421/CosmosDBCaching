@@ -12,30 +12,33 @@ public class Application implements CommandLineRunner {
 
 	@Autowired
 	private ProviderRepository repository;
+	@Autowired
+	private ProviderTwoRepository repository_two;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 	protected String getProviderString() {
         String ProviderCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        StringBuilder salt = new StringBuilder();
+        StringBuilder sb= new StringBuilder();
         Random rnd = new Random();
-        while (salt.length() < 5) { // length of the random string.
+        while (sb.length() < 5) { // length of the random string.
             int index = (int) (rnd.nextFloat() * ProviderCHARS.length());
-            salt.append(ProviderCHARS.charAt(index));
+            sb.append(ProviderCHARS.charAt(index));
         }
-        String saltStr = salt.toString();
+        String saltStr = sb.toString();
         return saltStr;
 
     }
 	@Override
 	public void run(String... args) throws Exception {
 		
-		repository.deleteAll();
+		//repository.deleteAll();
 
 		// save a couple of Provider
-		for(int i=0;i<1000;i++) {
+		for(int i=0;i<5000;i++) {
 			repository.save(new Provider(getProviderString(), getProviderString()));
+			repository_two.save(new Provider(getProviderString(), getProviderString()));
 		}
 		
 		
@@ -43,14 +46,26 @@ public class Application implements CommandLineRunner {
 		//repository.save(new Provider("Urvashi", "Gautam"));
 
 		// fetch all Provider
+		long startTime = System.nanoTime();
 		System.out.println("Provider found with findAll():");
 		System.out.println("-------------------------------");
-		for (Provider customer : repository.findAll()) {
-			System.out.println(customer);
+		
+		for (Provider provider : repository.findAll()) {
+			System.out.println(provider);
 		}
-		System.out.println();
+		long endTime = System.nanoTime();
+		
+		
+		
+		System.out.println("providerTwo found with findAll():");
+		System.out.println("-------------------------------");
+		for (Provider providerTwo : repository.findAll()) {
+			System.out.println(providerTwo);
+		}
+		long duration = (endTime - startTime);
+		System.out.println(" Time taken to read 11000 records from two different documents ---------> "+duration);
 
-		// fetch an individual Provider
+		/*fetch an individual Provider
 		System.out.println("Provider found with findByFirstName('sadaf'):");
 		System.out.println("--------------------------------");
 		System.out.println(repository.findByFirstName("sadaf"));
@@ -59,7 +74,7 @@ public class Application implements CommandLineRunner {
 		System.out.println("--------------------------------");
 		for (Provider provider : repository.findByLastName("Urvashi")) {
 			System.out.println(provider);
-		}
+		}*/
 
 	}
 

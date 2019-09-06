@@ -8,5 +8,5 @@ public interface ProviderRepository extends MongoRepository<Provider, String> {
 
     public Provider findByFirstName(String firstName);
     public List<Provider> findByLastName(String lastName);
-
+    
 }

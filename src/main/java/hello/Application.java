@@ -1,5 +1,7 @@
 package hello;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,14 +16,25 @@ public class Application implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
+	protected String getProviderString() {
+        String ProviderCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 5) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * ProviderCHARS.length());
+            salt.append(ProviderCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
 
+    }
 	@Override
 	public void run(String... args) throws Exception {
-
+		
 		repository.deleteAll();
 
 		// save a couple of Provider
-		repository.save(new Provider("sadaf", "ali"));
+		repository.save(new Provider(getProviderString(), getProviderString()));
 		repository.save(new Provider("Urvashi", "Gautam"));
 
 		// fetch all Provider
@@ -39,8 +52,8 @@ public class Application implements CommandLineRunner {
 
 		System.out.println("Provider found with findByLastName('Urvashi'):");
 		System.out.println("--------------------------------");
-		for (Provider customer : repository.findByLastName("Urvashi")) {
-			System.out.println(customer);
+		for (Provider provider : repository.findByLastName("Urvashi")) {
+			System.out.println(provider);
 		}
 
 	}

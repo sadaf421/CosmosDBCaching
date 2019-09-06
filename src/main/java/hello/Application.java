@@ -36,10 +36,10 @@ public class Application implements CommandLineRunner {
 		//repository.deleteAll();
 
 		// save a couple of Provider
-		for(int i=0;i<10000;i++) {
+		/*for(int i=0;i<10000;i++) {
 			//repository.save(new Provider(getProviderString(), getProviderString()));
 			repository_two.save(new Provider_two(getProviderString(), getProviderString()));
-		}
+		}*/
 		
 		
 		
@@ -53,7 +53,7 @@ public class Application implements CommandLineRunner {
 		for (Provider provider : repository.findAll()) {
 			System.out.println(provider);
 		}
-		long endTime = System.nanoTime();
+		
 		
 		
 		
@@ -62,6 +62,7 @@ public class Application implements CommandLineRunner {
 		for (Provider providerTwo : repository.findAll()) {
 			System.out.println(providerTwo);
 		}
+		long endTime = System.nanoTime();
 		long duration = (endTime - startTime)/1000000;
 		System.out.println(" Time taken to read 11000 records from two different documents ---------> "+duration +"ms"+" \n provider 1 count --->"+repository.count()+" \n provider 2 count --->"+repository_two.count());
 

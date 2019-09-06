@@ -36,9 +36,9 @@ public class Application implements CommandLineRunner {
 		//repository.deleteAll();
 
 		// save a couple of Provider
-		for(int i=0;i<5000;i++) {
-			repository.save(new Provider(getProviderString(), getProviderString()));
-			repository_two.save(new Provider(getProviderString(), getProviderString()));
+		for(int i=0;i<10000;i++) {
+			//repository.save(new Provider(getProviderString(), getProviderString()));
+			repository_two.save(new Provider_two(getProviderString(), getProviderString()));
 		}
 		
 		
@@ -62,8 +62,8 @@ public class Application implements CommandLineRunner {
 		for (Provider providerTwo : repository.findAll()) {
 			System.out.println(providerTwo);
 		}
-		long duration = (endTime - startTime);
-		System.out.println(" Time taken to read 11000 records from two different documents ---------> "+duration);
+		long duration = (endTime - startTime)/1000000;
+		System.out.println(" Time taken to read 11000 records from two different documents ---------> "+duration +"ms"+" \n provider 1 count --->"+repository.count()+" \n provider 2 count --->"+repository_two.count());
 
 		/*fetch an individual Provider
 		System.out.println("Provider found with findByFirstName('sadaf'):");

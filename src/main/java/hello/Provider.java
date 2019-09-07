@@ -7,13 +7,15 @@ public class Provider {
 
     @Id
     public String id;
-
+    
+    public int uniqueid;
     public String firstName;
     public String lastName;
 
     public Provider() {}
 
-    public Provider(String firstName, String lastName) {
+    public Provider(int uniqueid,String firstName, String lastName) {
+    	this.uniqueid = uniqueid;
         this.firstName = firstName;
         this.lastName = lastName;
     }

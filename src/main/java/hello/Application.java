@@ -38,8 +38,8 @@ public class Application implements CommandLineRunner {
 
 		 //save a couple of Provider
 		long startWriteTime = System.nanoTime();
-		for(int i=0;i<10000;i++) {
-			repository.save(new Provider(getProviderString(), getProviderString()));
+		for(int i=0;i<50000;i++) {
+			repository.save(new Provider(i,getProviderString(), getProviderString()));
 			repository_two.save(new Provider_two(getProviderString(), getProviderString()));
 		}
 		long writeTime = System.nanoTime();

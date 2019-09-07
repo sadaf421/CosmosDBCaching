@@ -37,12 +37,13 @@ public class Application implements CommandLineRunner {
 		//repository.deleteAll();
 
 		 //save a couple of Provider
-		/*for(int i=0;i<100000;i++) {
+		long startWriteTime = System.nanoTime();
+		for(int i=0;i<10000;i++) {
 			repository.save(new Provider(getProviderString(), getProviderString()));
 			repository_two.save(new Provider_two(getProviderString(), getProviderString()));
-		}*/
-		
-		
+		}
+		long writeTime = System.nanoTime();
+		long writeDuration = (writeTime - startWriteTime);
 		
 		//repository.save(new Provider("Urvashi", "Gautam"));
 
@@ -66,8 +67,8 @@ public class Application implements CommandLineRunner {
 		}
 		long endTime = System.nanoTime();
 		long duration = (endTime - startTime);
-		System.out.println(" Time taken to read 21000 records from two different documents ---------> "+TimeUnit.NANOSECONDS.toMillis(duration) +"ms"+" \n provider 1 count --->"+repository.count()+" \n provider 2 count --->"+repository_two.count());
-
+		System.out.println(" Time taken to read records from two different documents ---------> "+TimeUnit.NANOSECONDS.toMillis(duration) +"ms"+" \n provider 1 count --->"+repository.count()+" \n provider 2 count --->"+repository_two.count());
+		System.out.println(" Time taken to write records from two different documents ---------> "+TimeUnit.NANOSECONDS.toMillis(writeDuration) +"ms"+" \n provider 1 count --->"+repository.count()+" \n provider 2 count --->"+repository_two.count());
 		/*fetch an individual Provider
 		System.out.println("Provider found with findByFirstName('sadaf'):");
 		System.out.println("--------------------------------");
